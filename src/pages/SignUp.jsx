@@ -10,6 +10,7 @@ import {
   Title,
   Wrap,
 } from "../components/UI/styled/login.styled";
+import { register } from "../lib/api/auth";
 
 const StyledLink = styled(Link)`
   width: 48%;
@@ -40,7 +41,7 @@ export default function SignUp() {
     e.preventDefault();
   };
 
-  const handleRegister = () => {
+  const handleRegister = async() => {
     console.log(id);
     console.log(password);
     console.log(nickname);
@@ -60,7 +61,8 @@ export default function SignUp() {
        return;
     }
 
-    console.log("회원가입 API호출!!");
+    const response = await register({id: id, password: password, nickname: nickname});
+    console.log(response);
   };
 
   return (
