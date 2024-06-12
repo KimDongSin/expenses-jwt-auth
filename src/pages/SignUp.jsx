@@ -1,5 +1,5 @@
 import { useId, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {
   ButtonContainer,
@@ -33,6 +33,7 @@ export default function SignUp() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
+  const navigate = useNavigate();
   const formId = useId();
   const formPwd = useId();
   const formName = useId();
@@ -41,11 +42,7 @@ export default function SignUp() {
     e.preventDefault();
   };
 
-  const handleRegister = async() => {
-    console.log(id);
-    console.log(password);
-    console.log(nickname);
-
+  const handleRegister = async () => {
     if (id.trim().length < 4 || id.trim().length > 10) {
       alert("아이디는 4글자에서 10글자 이내로만 가능합니다!");
       return;
@@ -58,11 +55,18 @@ export default function SignUp() {
 
     if (nickname.trim().length < 4 || nickname.trim().length > 10) {
       alert("닉네임은 4글자에서 10글자 이내로만 가능합니다!");
-       return;
+      return;
     }
 
-    const response = await register({id: id, password: password, nickname: nickname});
-    console.log(response);
+    const response = await register({
+      id: id,
+      password: password,
+      nickname: nickname,
+    });
+    if(response){
+      confirm("회원가입이 완료되었습니다.");
+      navigate("/sign-in");
+    }
   };
 
   return (
