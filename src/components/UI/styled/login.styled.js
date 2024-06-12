@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrap = styled.div`
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 4rem);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,7 +47,6 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
 
 export const FormInfoBox = styled.div`
   display: flex;
