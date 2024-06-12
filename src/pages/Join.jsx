@@ -1,7 +1,7 @@
 import { useId } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ButtonContainer, Form, FormInfoBox, Input, Label, Title, Wrap } from "../components/UI/styled/login.styled";
+import { ButtonContainer, Form, FormInfoBox, Input, Label, Title, Wrap } from "../components/UI/styled/Login.styled";
 
 const StyledLink = styled(Link)`
   width: 48%;
