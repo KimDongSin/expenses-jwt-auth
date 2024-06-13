@@ -57,13 +57,13 @@ export default function SignUp() {
       alert("닉네임은 4글자에서 10글자 이내로만 가능합니다!");
       return;
     }
- 
+
     const response = await register({
       id: id,
       password: password,
       nickname: nickname,
     });
-    if(response){
+    if (response) {
       confirm("회원가입이 완료되었습니다.");
       navigate("/sign-in");
     }

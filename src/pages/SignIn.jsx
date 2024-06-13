@@ -10,6 +10,7 @@ import {
   Title,
   Wrap,
 } from "../components/UI/styled/login.styled";
+import { login } from "../lib/api/auth";
 
 const StyledLink = styled(Link)`
   width: 48%;
@@ -38,8 +39,9 @@ export default function SignIn() {
     e.preventDefault();
   };
 
-  const handleSignIn = () => {
-    console.log(userId, userPwd);
+  const handleSignIn = async () => {
+    const response = await login({ id: userId, password: userPwd });
+    console.log("로그인 API 응답값 :", response);
   };
 
   return (

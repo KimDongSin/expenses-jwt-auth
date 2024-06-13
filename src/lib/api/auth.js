@@ -15,3 +15,16 @@ export const register = async ({ id, password, nickname }) => {
     alert(error?.response?.data?.message);
   }
 };
+
+export const login = async ({id, password}) => {
+    try{
+        const response = await axios.post(`${AUTH_API_HOST}/login?expiresIn=10m`,{ // accessToken 유효시간 조정을 위한 query string.
+            id: id,
+            password: password,
+        });
+        return response.data;
+    } catch(error){
+        console.log(error?.response?.data?.message);
+        alert(error?.response?.data?.message);
+    }
+}
