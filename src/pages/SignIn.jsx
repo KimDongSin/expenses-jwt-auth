@@ -29,9 +29,9 @@ const StyledLink = styled(Link)`
   }
 `;
 
-export default function SignIn() {
-  const [userId, setUserId] = useState("");
-  const [userPwd, setUserPwd] = useState("");
+export default function SignIn({ setUser }) {
+  const [id, SetId] = useState("");
+  const [Pwd, setPwd] = useState("");
   const formId = useId();
   const formPwd = useId();
 
@@ -40,8 +40,11 @@ export default function SignIn() {
   };
 
   const handleSignIn = async () => {
-    const response = await login({ id: userId, password: userPwd });
-    console.log("로그인 API 응답값 :", response);
+    const { userId, nickname, avatar } = await login({ id: id, password: Pwd });
+
+    setUser({ userId, nickname, avatar });
+
+    console.log("로그인 API 응답값 :", userId, nickname, avatar);
   };
 
   return (
@@ -55,7 +58,7 @@ export default function SignIn() {
             id={formId}
             type="text"
             placeholder="아이디"
-            onChange={(e) => setUserId(e.target.value)}
+            onChange={(e) => SetId(e.target.value)}
           />
         </FormInfoBox>
 
@@ -65,7 +68,7 @@ export default function SignIn() {
             id={formPwd}
             type="password"
             placeholder="비밀번호"
-            onChange={(e) => setUserPwd(e.target.value)}
+            onChange={(e) => setPwd(e.target.value)}
           />
         </FormInfoBox>
 
