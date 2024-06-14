@@ -1,5 +1,5 @@
 import { useId, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {
   ButtonContainer,
@@ -34,6 +34,7 @@ export default function SignIn({ setUser }) {
   const [Pwd, setPwd] = useState("");
   const formId = useId();
   const formPwd = useId();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,10 +42,9 @@ export default function SignIn({ setUser }) {
 
   const handleSignIn = async () => {
     const { userId, nickname, avatar } = await login({ id: id, password: Pwd });
-
+    alert("로그인이 되었습니다.")
     setUser({ userId, nickname, avatar });
-
-    console.log("로그인 API 응답값 :", userId, nickname, avatar);
+    navigate("/");
   };
 
   return (

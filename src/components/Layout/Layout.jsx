@@ -46,7 +46,7 @@ const UserAvatar = styled.img`
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
-  border: 2px solid #ffffff33; /* Light border around avatar */
+  border: 2px solid #ffffff33;
 `;
 
 const UserName = styled.span`
@@ -71,10 +71,9 @@ const LogoutButton = styled.button`
 `;
 
 const PageContainer = styled.div`
-  padding: 100px 20px; /* Adjusted padding to account for Navbar height */
-  background-color: #f9fafb;
+  padding: 100px 20px;
   min-height: 100vh;
-  margin-top: 60px; /* To prevent content from being hidden under the navbar */
+  margin-top: 60px;
 `;
 
 const Logo = styled.h1`
@@ -89,7 +88,7 @@ const Logo = styled.h1`
     Layout 컴포넌트가 렌더링될 때 마다 엑세스 토큰 체크하고
     토큰만료가 되었는지도 체크해서 유저도 매번 업데이트 시킨다.
 */
-export default function Layout({ setUser }) {
+export default function Layout({ user, setUser }) {
   const navigate = useNavigate();
 
   /*
@@ -111,18 +110,38 @@ export default function Layout({ setUser }) {
           avater: res.avater,
         });
       }
-      else{ // 토큰이 유효하지 않으면 로그인 페이지로 리다이렉트시키고, user 상태와 로컬스토리지 클리어
-        setUser(null);
-        navigate("/sign-in");
-        localStorage.clear();
+      else{ // 토큰이 유효하지 않을 시 로그아웃 처리
+        handleLogout();
       }
     });
   }, []);
 
+  const handleLogout = () => {
+    setUser(null);
+    navigate("/sign-in");
+    localStorage.clear;
+  }
+
   return (
     <>
-      <Navbar>네비바</Navbar>
-      <Outlet />
+       <Navbar>
+        <NavItems>
+          <NavItem to="/">HOME</NavItem>
+          <NavItem to="/profile">내 프로필</NavItem>
+        </NavItems>
+        <UserProfile>
+          {user && ( // user가 있을 때만.
+            <>
+              <UserAvatar src={user.avatar} alt="User Avatar" />
+              <UserName>{user.nickname}</UserName>
+              <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+            </>
+          )}
+        </UserProfile>
+      </Navbar>
+      <PageContainer>
+        <Outlet />
+      </PageContainer>
     </>
   );
 }
