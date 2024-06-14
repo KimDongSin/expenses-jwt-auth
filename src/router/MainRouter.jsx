@@ -40,9 +40,12 @@ function MainRouter() {
         <Route path="/" element={<Layout user={user} setUser={setUser} />}>
           <Route index element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />
+          <Route
+            path="/profile"
+            element={<Profile user={user} setUser={setUser} />}
+          />
         </Route>
 
-        <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
         <Route path="/sign-in" element={<SignIn setUser={setUser} />} />
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
