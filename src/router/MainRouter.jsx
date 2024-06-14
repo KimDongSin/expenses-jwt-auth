@@ -27,7 +27,7 @@ function MainRouter() {
       setUser({
         userId: res.id,
         nickname: res.nickname,
-        avater: res.avater,
+        avatar: res.avatar,
       });
     });
   }, []);

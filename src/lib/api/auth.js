@@ -54,7 +54,7 @@ export const updateProfile = async (formData) => {
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
     try {
-      const response = await axios.patch(AUTH_API_HOST + "/profile", formData, {
+      const response = await axios.patch(`${AUTH_API_HOST}/profile`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${accessToken}`,
