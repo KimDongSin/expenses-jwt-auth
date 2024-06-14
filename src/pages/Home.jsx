@@ -25,9 +25,6 @@ export default function Home() {
   const [month, setMonth] = useState(1);
   // expenses month와 month가 같으면 :: 선택된 해당 월만 표시
   const expenses = useSelector((state) => state.expenses);
-
-  console.log(expenses);
-
   const filteredExpenses = expenses.filter((expenses) => expenses.month === month);
 
   return (

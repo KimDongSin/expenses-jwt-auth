@@ -1,4 +1,7 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { updateProfile } from "../lib/api/auth";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 400px;
@@ -62,19 +65,51 @@ const Button = styled.button`
   }
 `;
 
-export default function Profile() {
+export default function Profile({ user, setUser }) {
+  const [nickname, setNickname] = useState("");
+  const [avatar, setAvatar] = useState(null);
+  const navigate = useNavigate();
+
+  const handleUpdateProfile = async () => {
+    const formData = new FormData();
+    formData.append("nickname", nickname);
+    formData.append("avatar", avatar);
+
+    console.log(formData);
+
+    const response = await updateProfile(formData);
+    if (response.success) {
+      setUser({
+        ...user,
+        nickname: response.nickname,
+        avatar: response.avatar,
+      });
+      navigate("/");
+    }
+  };
+
   return (
     <Container>
-      <Title>프로필 수정</Title>
+      <h2>프로필 수정</h2>
       <InputGroup>
         <label htmlFor="nickname">닉네임</label>
-        <input type="text" id="nickname" placeholder="닉네임을 입력하세요" minLength="1" maxLength="10" />
+        <input
+          type="text"
+          placeholder="닉네임"
+          minLength="1"
+          maxLength="10"
+          onChange={(e) => setNickname(e.target.value)}
+        />
       </InputGroup>
       <InputGroup>
-        <label htmlFor="avatar">아바타 이미지 업로드</label>
-        <input type="file" id="avatar" accept="image/*" />
+        <label htmlFor="avatar">아바타 이미지</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setAvatar(e.target.files[0])}
+        />
       </InputGroup>
-      <Button>프로필 업데이트</Button>
+      <Button onClick={handleUpdateProfile}>프로필 업데이트</Button>
     </Container>
   );
 }

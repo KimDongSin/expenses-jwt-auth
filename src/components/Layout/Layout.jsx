@@ -119,7 +119,7 @@ export default function Layout({ user, setUser }) {
   const handleLogout = () => {
     setUser(null);
     navigate("/sign-in");
-    localStorage.clear;
+    localStorage.clear();
   }
 
   return (

@@ -42,7 +42,7 @@ function MainRouter() {
           <Route path="/detail/:id" element={<Detail />} />
         </Route>
 
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
         <Route path="/sign-in" element={<SignIn setUser={setUser} />} />
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
