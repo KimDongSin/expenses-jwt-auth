@@ -75,8 +75,6 @@ export default function Profile({ user, setUser }) {
     formData.append("nickname", nickname);
     formData.append("avatar", avatar);
 
-    console.log(formData);
-
     const response = await updateProfile(formData);
     if (response.success) {
       setUser({
