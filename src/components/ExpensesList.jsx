@@ -1,7 +1,9 @@
 import { Section } from "../pages/Home";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
+import { getExpenses } from "../lib/api/expense";
 
 const ExpenseItemList = styled.div`
   display: flex;
@@ -63,7 +65,15 @@ const ExpenseDetails = styled.div`
 
 export default function ExpenseList() {
   const navigate = useNavigate();
-  const expenses = useSelector((state) => state.expenses);
+  // const expenses = useSelector((state) => state.expenses);
+  const {
+    data: expenses = [],
+    isLoading,
+    error,
+  } = useQuery({ queryKey: ["expense"], queryFn: getExpenses });
+
+  console.log("isLoading:", isLoading);
+  console.log("expenses:", expenses);
 
   return (
     <Section>
