@@ -6,6 +6,7 @@ import SignUp from "../pages/SignUp";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "../lib/api/auth";
 import Layout from "../components/Layout/Layout";
+import Profile from "../pages/Profile";
 
 function MainRouter() {
   const [user, setUser] = useState(null);
@@ -41,6 +42,7 @@ function MainRouter() {
           <Route path="/detail/:id" element={<Detail />} />
         </Route>
 
+        <Route path="/profile" element={<Profile />} />
         <Route path="/sign-in" element={<SignIn setUser={setUser} />} />
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
