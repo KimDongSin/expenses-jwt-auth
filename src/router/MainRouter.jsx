@@ -5,10 +5,10 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "../lib/api/auth";
+import Layout from "../components/Layout/Layout";
 
 function MainRouter() {
   const [user, setUser] = useState(null);
-
 
   /*
     새로고침 대응
@@ -28,16 +28,19 @@ function MainRouter() {
         nickname: res.nickname,
         avater: res.avater,
       });
-    })
-  }, [])
+    });
+  }, []);
 
   console.log("로그인된 유저 정보 ::", user);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/" element={<Layout user={user} setUser={setUser} />}>
+          <Route index element={<Home />} />
+          <Route path="/detail/:id" element={<Detail />} />
+        </Route>
+
         <Route path="/sign-in" element={<SignIn setUser={setUser} />} />
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
