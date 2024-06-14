@@ -41,7 +41,7 @@ const UserProfile = styled.div`
   align-items: center;
 `;
 
-const UserAvatar = styled.img`
+const Useravatar = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -107,7 +107,7 @@ export default function Layout({ user, setUser }) {
         setUser({
           userId: res.id,
           nickname: res.nickname,
-          avater: res.avater,
+          avatar: res.avatar,
         });
       }
       else{ // 토큰이 유효하지 않을 시 로그아웃 처리
@@ -132,7 +132,7 @@ export default function Layout({ user, setUser }) {
         <UserProfile>
           {user && ( // user가 있을 때만.
             <>
-              <UserAvatar src={user.avatar} alt="User Avatar" />
+              <Useravatar src={user.avatar} alt="User avatar" />
               <UserName>{user.nickname}</UserName>
               <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
             </>
